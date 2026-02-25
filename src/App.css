@@ -272,7 +272,7 @@
 .content-section p {
 	margin: 0 0 12px;
 	max-width: 72ch;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	line-height: 1.7;
 }
 
@@ -285,7 +285,7 @@
 }
 
 .section--about .section-eyebrow {
-	font-size: 0.85rem;
+	font-size: 1rem;
 	letter-spacing: 0.20em;
 	color: rgba(11, 18, 36, 0.55);
 }
@@ -296,8 +296,8 @@
 }
 
 .section--about p {
-	font-size: 1.05rem;
-	line-height: 1.7;
+	font-size: 1rem;
+	/* line-height: 1.7; */
 }
 
 .section--about .section-lede {
