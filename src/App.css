@@ -108,6 +108,44 @@
 	align-items: center;
 }
 
+.mobile-nav-toggle {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 42px;
+	height: 42px;
+	border-radius: 10px;
+	border: 1px solid rgba(148, 163, 184, 0.55);
+	background: rgba(15, 23, 42, 0.62);
+	color: #ffffff;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+.mobile-nav-panel {
+	display: none;
+	padding: 0;
+	max-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	pointer-events: none;
+	transition: max-height 0.28s ease, opacity 0.2s ease, padding 0.2s ease;
+}
+
+.mobile-nav-link {
+	display: block;
+	text-decoration: none;
+	font-size: 1rem;
+	color: rgba(248, 250, 252, 0.95);
+	padding: 12px 0;
+	border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.mobile-nav-cta {
+	margin-top: 14px;
+	width: 100%;
+}
+
 .header-cta-btn {
 	padding: 8px 18px;
 	border-radius: 999px;
@@ -691,7 +729,7 @@
 
 @media (max-width: 720px) {
 	.hero-overlay {
-		padding-top: clamp(120px, 17vh, 150px);
+		padding-top: clamp(20px, 10vh, 20px);
 	}
 
 	.hero-content {
@@ -767,23 +805,6 @@
 }
 
 @media (max-width: 900px) {
-	.site-header-inner {
-		flex-wrap: wrap;
-		justify-content: center;
-		row-gap: 10px;
-	}
-
-	.site-nav {
-		order: 3;
-		width: 100%;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.header-cta {
-		order: 2;
-	}
-
 	.section-split {
 		grid-template-columns: 1fr;
 		gap: 22px;
@@ -799,6 +820,49 @@
 
 	.build-cards {
 		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 1024px) {
+	.desktop-nav,
+	.desktop-cta {
+		display: none;
+	}
+
+	.site-header-inner {
+		justify-content: space-between;
+	}
+
+	.mobile-nav-toggle {
+		display: inline-flex;
+	}
+
+	.mobile-nav-panel {
+		display: block;
+		margin: 0 clamp(16px, 4vw, 40px) 12px;
+		padding: 0;
+		max-height: 0;
+		opacity: 0;
+		pointer-events: none;
+		background: rgba(9, 16, 36, 0.92);
+		border: 1px solid rgba(148, 163, 184, 0.38);
+		border-radius: 14px;
+	}
+
+	.mobile-nav-panel.is-open {
+		max-height: 320px;
+		opacity: 1;
+		pointer-events: auto;
+		padding: 12px 16px 16px;
+	}
+
+	.site-header.mobile-nav-open {
+		background: linear-gradient(
+			to bottom,
+			rgba(9, 16, 36, 0.96),
+			rgba(9, 16, 36, 0.86),
+			rgba(9, 16, 36, 0.74)
+		);
 	}
 }
 

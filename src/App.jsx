@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
-import { useRef } from 'react';
-import { Server, ShieldCheck, Zap } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Menu, Server, ShieldCheck, X, Zap } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Particles from './assets/medusae';
 import logo from './assets/LOGO.png';
@@ -23,6 +23,11 @@ import './App.css';
 function App() {
   const contactFormRef = useRef(null);
   const isSubmittingRef = useRef(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const closeMobileNav = () => {
+    setIsMobileNavOpen(false);
+  };
 
   const handleContactSubmit = async (event) => {
     event.preventDefault();
@@ -60,23 +65,45 @@ function App() {
 
         {/* 🔹 Overlay Content */}
         <div className="hero-overlay">
-          <header className="site-header">
+          <header className={`site-header ${isMobileNavOpen ? 'mobile-nav-open' : ''}`}>
             <div className="site-header-inner">
               <div className="brand">
                 <img className="brand-logo" src={logo} alt="VFAM Solutions logo" />
                 <span className="brand-name">VFAM SOLUTIONS</span>
               </div>
 
-              <nav className="site-nav" aria-label="Upcoming sections">
+              <nav className="site-nav desktop-nav" aria-label="Upcoming sections">
                 <a className="nav-link" href="#about">What we build</a>
                 <a className="nav-link" href="#why-vfam">Why VFAM</a>
                 <a className="nav-link" href="#contact">Contact</a>
               </nav>
 
-              <div className="header-cta">
+              <div className="header-cta desktop-cta">
                 <a href="#contact" className="btn header-cta-btn">Book a demo</a>
               </div>
+
+              <button
+                type="button"
+                className="mobile-nav-toggle"
+                aria-label={isMobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={isMobileNavOpen}
+                aria-controls="mobile-nav-panel"
+                onClick={() => setIsMobileNavOpen((previous) => !previous)}
+              >
+                {isMobileNavOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+              </button>
             </div>
+
+            <nav
+              id="mobile-nav-panel"
+              className={`mobile-nav-panel ${isMobileNavOpen ? 'is-open' : ''}`}
+              aria-label="Mobile navigation"
+            >
+              <a className="mobile-nav-link" href="#about" onClick={closeMobileNav}>What we build</a>
+              <a className="mobile-nav-link" href="#why-vfam" onClick={closeMobileNav}>Why VFAM</a>
+              <a className="mobile-nav-link" href="#contact" onClick={closeMobileNav}>Contact</a>
+              <a className="btn mobile-nav-cta" href="#contact" onClick={closeMobileNav}>Book a demo</a>
+            </nav>
           </header>
 
           <main id="top">
