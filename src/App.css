@@ -49,13 +49,13 @@
 }
 
 .site-header-inner {
-	max-width: 1500px;
+	max-width: 1280px;
 	margin: 0 auto;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 24px;
-	padding: 14px 4px;
+	padding: 14px clamp(16px, 4vw, 40px);
 }
 
 .brand {
@@ -132,8 +132,8 @@
 }
 
 .hero-content {
-	width: min(640px, 90vw);
-	padding: 0 24px;
+	width: min(680px, 100%);
+	padding: 0 clamp(16px, 4vw, 24px);
 	display: grid;
 	gap: 20px;
 	text-align: center;
@@ -242,31 +242,31 @@
 }
 
 .section-inner {
-	max-width: 1800px;
+	max-width: 1280px;
 	margin: 0 auto;
-	padding: 70px 32px;
+	padding: clamp(56px, 8vw, 84px) clamp(16px, 6vw, 72px);
 }
 
 .section--about .section-inner,
 .section--why .section-inner {
-	padding-left: 140px;
-	padding-right: 120px;
+	padding-left: clamp(16px, 6vw, 72px);
+	padding-right: clamp(16px, 6vw, 72px);
 }
 
 .contact-section .section-inner {
-	padding-left: 140px;
-	padding-right: 32px;
+	padding-left: clamp(16px, 6vw, 72px);
+	padding-right: clamp(16px, 6vw, 72px);
 }
 
 .content-section h2 {
 	margin: 0 0 16px;
-	font-size: clamp(2.5rem, 3vw, 2.2rem);
+	font-size: clamp(1.9rem, 3vw, 2.5rem);
 	letter-spacing: -0.02em;
 }
 
 .section--about h2,
 .section--why h2 {
-	font-size: clamp(2.5rem, 3vw, 2.2rem);
+	font-size: clamp(1.9rem, 3vw, 2.5rem);
 }
 
 .content-section p {
@@ -291,7 +291,7 @@
 }
 
 .section--about h2 {
-	font-size: clamp(2.5rem, 3vw, 2.2rem);
+	font-size: clamp(1.9rem, 3vw, 2.5rem);
 	letter-spacing: -0.015em;
 }
 
@@ -442,7 +442,8 @@
 	background-color: #ffffff;
 	border-radius: 22px;
 	padding: 0.9rem 1rem 1rem;
-	max-width: 820px;
+	max-width: none;
+	width: 100%;
 	box-shadow: var(--shadow-soft);
 	border: 1px solid rgba(15, 23, 42, 0.06);
 }
@@ -509,7 +510,7 @@
 
 .form-note {
 	margin: 0;
-	padding: 0 40px;
+	padding: 0;
 	font-size: 0.75rem;
 	color: rgba(107, 114, 128, 1);
 }
@@ -555,9 +556,9 @@
 }
 
 .footer-inner {
-	max-width: 1800px;
+	max-width: 1280px;
 	margin: 0 auto;
-	padding: 0 100px;
+	padding: 0 clamp(16px, 6vw, 72px);
 	display: flex;
 	flex-direction: column;
 	gap: 28px;
@@ -689,8 +690,42 @@
 }
 
 @media (max-width: 720px) {
+	.hero-overlay {
+		padding-top: clamp(120px, 17vh, 150px);
+	}
+
 	.hero-content {
-		padding-left: 24px;
+		gap: 16px;
+	}
+
+	.hero h1 {
+		font-size: clamp(2rem, 9vw, 2.8rem);
+	}
+
+	.hero-subtitle {
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+
+	.site-header-inner {
+		gap: 10px;
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	.brand-name {
+		font-size: 0.8rem;
+		letter-spacing: 0.08em;
+	}
+
+	.site-nav {
+		gap: 6px;
+	}
+
+	.nav-link {
+		padding: 8px 10px;
+		font-size: 0.78rem;
+		letter-spacing: 0.06em;
 	}
 
 	.form-row {
@@ -706,12 +741,49 @@
 		width: 100%;
 	}
 
+	.content-section p {
+		font-size: 0.95rem;
+	}
+
+	.section-eyebrow {
+		font-size: 0.85rem;
+		letter-spacing: 0.14em;
+	}
+
 	.footer-columns {
 		grid-template-columns: minmax(0, 1fr);
+		gap: 24px;
+	}
+
+	.footer-bottom,
+	.footer-meta {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.footer-divider {
+		display: none;
 	}
 }
 
 @media (max-width: 900px) {
+	.site-header-inner {
+		flex-wrap: wrap;
+		justify-content: center;
+		row-gap: 10px;
+	}
+
+	.site-nav {
+		order: 3;
+		width: 100%;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.header-cta {
+		order: 2;
+	}
+
 	.section-split {
 		grid-template-columns: 1fr;
 		gap: 22px;
@@ -727,6 +799,13 @@
 
 	.build-cards {
 		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 1100px) {
+	.footer-columns {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 28px;
 	}
 }
 
