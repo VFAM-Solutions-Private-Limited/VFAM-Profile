@@ -587,6 +587,34 @@
   	box-shadow: 0 12px 30px rgba(0, 157, 255, 0.28);
 }
 
+.submit-btn:disabled {
+	opacity: 0.72;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+.form-status {
+	margin: 0.8rem 0 0;
+	padding: 0.72rem 0.9rem;
+	border-radius: 12px;
+	font-size: 0.92rem;
+	font-weight: 500;
+	border: 1px solid transparent;
+}
+
+.form-status-success {
+	color: #166534;
+	background-color: #dcfce7;
+	border-color: #86efac;
+}
+
+.form-status-error {
+	color: #991b1b;
+	background-color: #fee2e2;
+	border-color: #fca5a5;
+}
+
 .site-footer {
 	background: radial-gradient(circle at top, #0c5ea8 0, #001c78 55%, #000038 100%);
 	color: rgba(148, 163, 184, 0.96);

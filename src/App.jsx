@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import { Menu, Server, ShieldCheck, X, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import Particles from './assets/medusae';
 import logo from './assets/LOGO.png';
@@ -24,6 +25,8 @@ function App() {
   const contactFormRef = useRef(null);
   const isSubmittingRef = useRef(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
 
   const closeMobileNav = () => {
     setIsMobileNavOpen(false);
@@ -34,6 +37,8 @@ function App() {
     if (!contactFormRef.current || isSubmittingRef.current) return;
 
     isSubmittingRef.current = true;
+    setIsSubmitting(true);
+    setFormStatus({ type: '', message: '' });
 
     try {
       await emailjs.sendForm(
@@ -46,12 +51,19 @@ function App() {
       );
 
       contactFormRef.current.reset();
-      alert('Thanks! Your message has been sent.');
+      setFormStatus({
+        type: 'success',
+        message: 'Thanks! Your message has been sent successfully.',
+      });
     } catch (error) {
       console.error('EmailJS error:', error);
-      alert('Sorry, something went wrong. Please try again.');
+      setFormStatus({
+        type: 'error',
+        message: 'Sorry, something went wrong. Please try again.',
+      });
     } finally {
       isSubmittingRef.current = false;
+      setIsSubmitting(false);
     }
   };
 
@@ -279,11 +291,25 @@ function App() {
                   />
                 </div>
                 <div className="form-footer">
-                  <button type="submit" className="btn btn-primary submit-btn">Submit</button>
+                  <button type="submit" className="btn btn-primary submit-btn" disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending...' : 'Submit'}
+                  </button>
                   <p className="form-note">
                     We only use this information to respond to your enquiry.
                   </p>
                 </div>
+
+                {formStatus.message ? (
+                  <p
+                    className={`form-status ${
+                      formStatus.type === 'success' ? 'form-status-success' : 'form-status-error'
+                    }`}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    {formStatus.message}
+                  </p>
+                ) : null}
               </form>
               <aside className="contact-aside">
                 <div className="contact-aside-block">
@@ -322,7 +348,7 @@ function App() {
               <div className="footer-col">
                 <h3>Company</h3>
                 <ul>
-                  <li><a href="#about">Overview</a></li>
+                  <li><a href="#">Overview</a></li>
                   <li><a href="#about">What we build</a></li>
                   <li><a href="#why-vfam">Why VFAM</a></li>
                 </ul>
@@ -341,9 +367,9 @@ function App() {
             <div className="footer-meta">
               <span>© 2026 VFAM Solutions Private Limited.</span>
               <span className="footer-divider" aria-hidden="true"></span>
-              <a className="footer-link" href="#">Privacy Policy</a>
+              <Link className="footer-link" to="/privacy-policy">Privacy Policy</Link>
               <span className="footer-divider" aria-hidden="true"></span>
-              <a className="footer-link" href="#">Terms</a>
+              <Link className="footer-link" to="/terms-and-conditions">Terms and Conditions</Link>
             </div>
                 {/* <a className="footer-social" href="#" aria-label="VFAM social">
                   <span className="social-icon" aria-hidden="true"></span>
